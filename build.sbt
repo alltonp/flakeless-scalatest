@@ -14,7 +14,7 @@ resolvers ++= Seq(
 )
 
 libraryDependencies ++= Seq(
-  "im.mange"      %% "flakeless" % "[0.0.142,0.0.999]" % "provided",
+//  "im.mange"      %% "flakeless" % "[0.0.143,0.0.999]" % "provided",
 	"org.scalatest" %% "scalatest" % "[2.2.0,3.99.99]" % "provided"
 )
 sonatypeSettings
