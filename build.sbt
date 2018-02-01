@@ -7,14 +7,14 @@ organization := "im.mange"
 
 version := Try(sys.env("TRAVIS_BUILD_NUMBER")).map("0.0." + _).getOrElse("1.0-SNAPSHOT")
 
-scalaVersion:= "2.12.3"
+scalaVersion:= "2.12.4"
 
 resolvers ++= Seq(
   "Sonatype OSS Releases" at "http://oss.sonatype.org/content/repositories/releases/"
 )
 
 libraryDependencies ++= Seq(
-//	"org.scalatest" %% "scalatest" % "2.2.0" % "test"
+	"org.scalatest" %% "scalatest" % "[2.2.0,3.99.99]" % "provided"
 )
 sonatypeSettings
 
