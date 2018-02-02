@@ -15,8 +15,8 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "im.mange"      %% "flakeless" % "[0.0.143,0.0.999]" % "provided",
-	//TODO: should be 3.0.99, but appears they have a load of mangey snapshots
-  "org.scalatest" %% "scalatest" % "[2.2.0,3.0.4]" % "provided"
+	//TODO: should be to 3.0.99, but appears they have a load of mangey snapshots
+  "org.scalatest" %% "scalatest" % "[3.0.4,3.0.4]" % "provided"
 )
 sonatypeSettings
 
