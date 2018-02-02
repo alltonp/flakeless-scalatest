@@ -9,6 +9,10 @@ import org.scalatest.{Outcome, TestSuite}
 //TODO: running in intellij have just one, one per cpu in sbt (see driveby)
 //TODO: deprecate driveby and friends
 //TODO: move example as per flakeless
+//TODO: add fluent page driver (like driveby) - maybe should be in flakeless?
+//TODO: any innards?
+//TODO: using probably wants to return a customer Driver instead of raw flakeless
+//TODO: Pool to something snappy
 
 trait FlakelessSpec extends TestSuite {
   val systemUnderTestPool: SystemUnderTestPool
@@ -28,7 +32,7 @@ trait FlakelessSpec extends TestSuite {
     testName
   }
 
-  def on(testBody: SystemUnderTest => Unit): Unit = {
+  def using(testBody: SystemUnderTest => Unit): Unit = {
     val sut = systemUnderTestPool.take().getOrElse(throw new RuntimeException("Failed to get a SystemUnderTest from pool:\n" + systemUnderTestPool.status))
 
     try {
