@@ -29,6 +29,7 @@ trait WebSpec extends TestSuite {
  }
 }
 
+//TOODO: move to example dir
 class ExampleSpec extends RefSpec with WebSpec {
   def `blah blah` = testInBrowser(flakeless => {
     //flakeless
