@@ -4,13 +4,6 @@ import im.mange.flakeless.Flakeless
 import org.openqa.selenium.phantomjs.PhantomJSDriver
 import org.scalatest.{Outcome, TestSuite}
 
-trait SystemUnderTest {
-  def baseUrl: String
-  def browser: Flakeless
-  def reset(): Unit
-  def reportFailure(t: Throwable): Unit
-}
-
 trait WebSpec extends TestSuite {
   private val _currentTestName = new ThreadLocal[String]
   private val suite = this.suiteId.split("\\.").reverse.head
@@ -28,13 +21,14 @@ trait WebSpec extends TestSuite {
     testName
   }
 
-  def testInBrowser(testBody: SystemUnderTest => Unit): Unit = {
+  def on(testBody: SystemUnderTest => Unit): Unit = {
 //    val sut = PooledServer.aquire
+    //I can be a case class and the first couple maybe be vals?
     val sut = new SystemUnderTest {
-      override def baseUrl: String =  "http://www.google.co.uk"
-      override def browser: Flakeless = Flakeless(new PhantomJSDriver())
-      override def reset(): Unit = {}
-      override def reportFailure(t: Throwable): Unit = {}
+      override val baseUrl =  "http://www.google.co.uk"
+      override val browser = Flakeless(new PhantomJSDriver())
+      override def reset() = {}
+      override def reportFailure(t: Throwable) = {}
     }
 
     try {
