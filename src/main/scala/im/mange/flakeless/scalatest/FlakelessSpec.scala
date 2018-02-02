@@ -1,10 +1,9 @@
 package im.mange.flakeless.scalatest
 
-import im.mange.flakeless.Flakeless
-import org.openqa.selenium.phantomjs.PhantomJSDriver
 import org.scalatest.{Outcome, TestSuite}
 
-trait WebSpec extends TestSuite {
+trait FlakelessSpec extends TestSuite {
+  val systemUnderTestPool: SystemUnderTestPool
   private val _currentTestName = new ThreadLocal[String]
   private val suite = this.suiteId.split("\\.").reverse.head
 
@@ -22,14 +21,14 @@ trait WebSpec extends TestSuite {
   }
 
   def on(testBody: SystemUnderTest => Unit): Unit = {
-//    val sut = PooledServer.aquire
+    val sut = systemUnderTestPool.take().getOrElse(throw new RuntimeException("Failed to get a SystemUnderTest"))
     //I can be a case class and the first couple maybe be vals?
-    val sut = new SystemUnderTest {
-      override val baseUrl =  "http://www.google.co.uk"
-      override val browser = Flakeless(new PhantomJSDriver())
-      override def reset() = {}
-      override def reportFailure(t: Throwable) = {}
-    }
+//    val sut = new SystemUnderTest {
+//      override val baseUrl =  "http://www.google.co.uk"
+//      override val browser = Flakeless(new PhantomJSDriver())
+//      override def reset() = {}
+//      override def reportFailure(t: Throwable) = {}
+//    }
 
     try {
       sut.browser.startFlight(suite, currentTestName)
