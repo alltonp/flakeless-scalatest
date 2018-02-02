@@ -2,6 +2,14 @@ package im.mange.flakeless.scalatest
 
 import org.scalatest.{Outcome, TestSuite}
 
+//TODO: do we need Resettable?
+//TODO: can SUT be a case class?
+//TODO: definitely need empty on pool
+//TODO: do we need
+//TODO: running in intellij have just one, one per cpu in sbt (see driveby)
+//TODO: deprecate driveby and friends
+//TODO: move example as per flakeless
+
 trait FlakelessSpec extends TestSuite {
   val systemUnderTestPool: SystemUnderTestPool
   private val _currentTestName = new ThreadLocal[String]

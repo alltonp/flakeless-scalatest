@@ -16,13 +16,14 @@ resolvers ++= Seq(
 libraryDependencies ++= Seq(
   "im.mange"      %% "flakeless" % "[0.0.145,0.0.999]" % "provided",
 	//TODO: should be to 3.0.99, but appears they have a load of mangey snapshots
-  "org.scalatest" %% "scalatest" % "[3.0.4,3.0.4]" % "provided",
+  "org.scalatest" %% "scalatest" % "[3.0.4,3.0.4]" % "provided"
 
-  //TIP: only for local testing ...
-  "com.codeborne" % "phantomjsdriver" % "[1.3.0,1.99.9]" % "provided",
-  "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,2.99.9]" % "provided"
-
+  //TIP: only enable these for local testing ...
+//  ,
+//  "com.codeborne" % "phantomjsdriver" % "[1.3.0,1.99.9]" % "provided",
+//  "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,2.99.9]" % "provided"
 )
+
 sonatypeSettings
 
 publishTo <<= version { project_version ⇒
