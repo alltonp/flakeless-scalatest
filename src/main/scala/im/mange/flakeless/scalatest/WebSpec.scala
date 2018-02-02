@@ -1,9 +1,8 @@
 package im.mange.flakeless.scalatest
 
-import im.mange.flakeless.{Flakeless, Goto}
+import im.mange.flakeless.Flakeless
 import org.openqa.selenium.phantomjs.PhantomJSDriver
-import org.scalatest.{FreeSpec, Matchers, Outcome, TestSuite}
-import org.scalatest.refspec.RefSpec
+import org.scalatest.{Outcome, TestSuite}
 
 trait WebSpec extends TestSuite {
   private val _currentTestName = new ThreadLocal[String]
@@ -42,10 +41,4 @@ trait WebSpec extends TestSuite {
   }
 }
 
-//TODO: move to example dir
-class ExampleSpec extends RefSpec with WebSpec {
-  def `blah blah` = testInBrowser(flakeless => {
-    Goto(flakeless, "http://www.google.co.uk")
-    println("I've run")
-  })
-}
+
