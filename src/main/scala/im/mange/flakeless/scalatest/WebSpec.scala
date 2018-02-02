@@ -23,9 +23,9 @@ trait WebSpec extends TestSuite {
 
   def testInBrowser(testBody: Flakeless => Unit): Unit = {
     println(suite + ":" + currentTestName)
-//   val flakeless = Flakeless(null)
-//   testBody(flakeless)
-    testBody(null)
+   val flakeless = Flakeless(null)
+   testBody(flakeless)
+//    testBody(null)
  }
 }
 
