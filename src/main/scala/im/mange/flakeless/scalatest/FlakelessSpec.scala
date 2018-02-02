@@ -21,14 +21,7 @@ trait FlakelessSpec extends TestSuite {
   }
 
   def on(testBody: SystemUnderTest => Unit): Unit = {
-    val sut = systemUnderTestPool.take().getOrElse(throw new RuntimeException("Failed to get a SystemUnderTest"))
-    //I can be a case class and the first couple maybe be vals?
-//    val sut = new SystemUnderTest {
-//      override val baseUrl =  "http://www.google.co.uk"
-//      override val browser = Flakeless(new PhantomJSDriver())
-//      override def reset() = {}
-//      override def reportFailure(t: Throwable) = {}
-//    }
+    val sut = systemUnderTestPool.take().getOrElse(throw new RuntimeException("Failed to get a SystemUnderTest from pool:\n" + systemUnderTestPool.status))
 
     try {
       sut.browser.startFlight(suite, currentTestName)
@@ -40,9 +33,7 @@ trait FlakelessSpec extends TestSuite {
       throw t
     } finally {
       sut.browser.stopFlight()
-//      PooledServer.release(sut)
+      systemUnderTestPool.write(sut)
     }
   }
 }
-
-
