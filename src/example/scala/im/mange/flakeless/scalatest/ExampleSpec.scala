@@ -3,19 +3,19 @@ package im.mange.flakeless.scalatest
 import im.mange.flakeless.{Flakeless, Goto}
 import org.scalatest.refspec.RefSpec
 
-//TODO: application and browser creation should probably be lazy vals ...
-//TODO: move to example dir
 object Moo {
-//  import org.openqa.selenium.phantomjs.PhantomJSDriver
-
   val moo = SystemUnderTestPool(
     List(new SystemUnderTest {
-            override val baseUrl = "http://www.google.co.uk"
-//            override val browser = Flakeless(new PhantomJSDriver())
-            override val browser = Flakeless(null)
-            override def reset() = {}
-          }
-    )
+      //launch application here ...
+      private val applicaton = ???
+      private val port = ???
+      private val webDriver = ??? //e.g. new org.openqa.selenium.phantomjs.PhantomJSDriver()
+
+      override val baseUrl = s"http://localhost:$port"
+      override val browser = Flakeless(webDriver)
+
+      override def reset() = {}
+    })
   )
 }
 
