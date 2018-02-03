@@ -3,8 +3,6 @@ package im.mange.flakeless.scalatest
 import java.util.concurrent.{LinkedBlockingQueue, TimeUnit}
 import collection.mutable.ListBuffer
 
-import scala.concurrent.ExecutionContext.Implicits.global
-
 //import scala.concurrent.Future
 import scala.concurrent.Future
 
