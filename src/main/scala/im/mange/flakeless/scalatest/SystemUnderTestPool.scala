@@ -9,10 +9,10 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
 case class SystemUnderTestPool(private val suts: List[SystemUnderTest])  {
-  suts.foreach(add)
-
   private val all = new ListBuffer[SystemUnderTest]
   private val available = new LinkedBlockingQueue[SystemUnderTest]
+
+  suts.foreach(add)
 
 //  def add(browser: BrowserType, instances: Int = 1) {
 //    times(instances) { add(BrowserFactory.create(browser)) }
