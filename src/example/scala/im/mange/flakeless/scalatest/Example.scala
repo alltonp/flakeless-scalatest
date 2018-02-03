@@ -20,7 +20,7 @@ object Infrastructure {
 }
 
 abstract class WebSpec extends RefSpec with FlakelessSpec {
-  protected val sutPool: SystemUnderTestPool = Infrastructure.sutPool
+  protected override val sutPool: SystemUnderTestPool = Infrastructure.sutPool
 }
 
 class ExampleSpec extends WebSpec {
