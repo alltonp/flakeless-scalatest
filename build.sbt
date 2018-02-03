@@ -9,7 +9,7 @@ version := Try(sys.env("TRAVIS_BUILD_NUMBER")).map("0.0." + _).getOrElse("1.0-SN
 
 scalaVersion:= "2.12.4"
 
-unmanagedSourceDirectories in Test += baseDirectory.value / "src" / "example" / "scala"
+unmanagedSourceDirectories in Compile += baseDirectory.value / "src" / "example" / "scala"
 
 resolvers ++= Seq(
   "Sonatype OSS Releases" at "http://oss.sonatype.org/content/repositories/releases/"

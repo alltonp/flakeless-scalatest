@@ -7,8 +7,8 @@ object Infrastructure {
   val sutPool = SystemUnderTestPool(
     List(new SystemUnderTest {
       //launch application here ...
-      private val application = ???
-      private val port = ???
+//      private val application = ???
+      private val port = 9000
       private val webDriver = ??? //e.g. new org.openqa.selenium.phantomjs.PhantomJSDriver()
 
       override val baseUrl = s"http://localhost:$port"
