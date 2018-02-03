@@ -14,7 +14,6 @@ object Moo {
 //            override val browser = Flakeless(new PhantomJSDriver())
             override val browser = Flakeless(null)
             override def reset() = {}
-            override def reportFailure(t: Throwable) = {}
           }
     )
   )
