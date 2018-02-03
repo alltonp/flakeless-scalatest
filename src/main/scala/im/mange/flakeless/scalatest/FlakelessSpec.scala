@@ -15,7 +15,10 @@ import org.scalatest.{Outcome, TestSuite}
 //TODO: Pool to something snappy
 
 trait FlakelessSpec extends TestSuite {
-  val systemUnderTestPool: SystemUnderTestPool
+
+  //TODO: ne nice to hide this somehow, so subclasses can't see it
+  protected val sutPool: SystemUnderTestPool
+
   private val _currentTestName = new ThreadLocal[String]
   private val suite = this.suiteId.split("\\.").reverse.head
 
@@ -33,19 +36,19 @@ trait FlakelessSpec extends TestSuite {
   }
 
   def using(testBody: SystemUnderTest => Unit): Unit = {
-    val sut = systemUnderTestPool.take().getOrElse(throw new RuntimeException("Failed to get a SystemUnderTest from pool:\n" + systemUnderTestPool.status))
+    val sut = sutPool.take().getOrElse(throw new RuntimeException("Failed to get a SystemUnderTest from pool:\n" + sutPool.status))
 
     try {
       sut.browser.startFlight(suite, currentTestName)
-      sut.reset()
+      sut.resetBeforeTest()
       testBody(sut)
     } catch {
       case t: Throwable =>
         sut.reportFailure(t)
-      throw t
+        throw t
     } finally {
       sut.browser.stopFlight()
-      systemUnderTestPool.write(sut)
+      sutPool.write(sut)
     }
   }
 }
