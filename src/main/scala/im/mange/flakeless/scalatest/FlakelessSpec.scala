@@ -1,23 +1,25 @@
 package im.mange.flakeless.scalatest
 
+import im.mange.flakeless.reports.CurrentTestReport
 import org.scalatest.{Outcome, TestSuite}
 
-//TODO: do we need Resettable?
+//TODO: do we need Resettable? - not so far
 //TODO: can SUT be a case class?
 //TODO: definitely need empty on pool
-//TODO: do we need
+//TODO: do we need ???
 //TODO: running in intellij have just one, one per cpu in sbt (see driveby)
 //TODO: deprecate driveby and friends
-//TODO: move example as per flakeless
-//TODO: add fluent page driver (like driveby) - maybe should be in flakeless?
 //TODO: any innards?
-//TODO: using probably wants to return a customer Driver instead of raw flakeless
+//TODO: using probably wants to return a customer Driver instead of raw flakeless - maybe, maybe not
 //TODO: Pool to something snappy
+//TODO: support reportAlways .. but where to put the Config .. seems odd to have one here as well as flakeless
+//... unless we extends one with the other ... flakeless.scalatest.Config
 
 trait FlakelessSpec extends TestSuite {
 
   //TODO: ne nice to hide this somehow, so subclasses can't see it
   protected val sutPool: SystemUnderTestPool
+  protected var alwaysReport = false
 
   private val _currentTestName = new ThreadLocal[String]
   private val suite = this.suiteId.split("\\.").reverse.head
@@ -47,6 +49,7 @@ trait FlakelessSpec extends TestSuite {
         sut.reportFailure(t)
         throw t
     } finally {
+      if (alwaysReport) CurrentTestReport(sut.browser)
       sut.browser.stopFlight()
       sutPool.write(sut)
     }
