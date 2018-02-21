@@ -38,6 +38,7 @@ trait FlakelessSpec extends TestSuite {
     testName
   }
 
+  //TODO: find a way to generalise this, so we can choose what to return, e.g. a driver
   def using(testBody: SystemUnderTest => Unit): Unit = {
     val sut = sutPool.take().getOrElse(throw new RuntimeException("Failed to get a SystemUnderTest from pool:\n" + sutPool.status))
 

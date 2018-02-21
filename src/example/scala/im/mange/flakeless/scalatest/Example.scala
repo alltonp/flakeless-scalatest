@@ -14,7 +14,7 @@ object Infrastructure {
       override val baseUrl = s"http://localhost:$port"
       override val browser = Flakeless(webDriver)
 
-      override def resetBeforeTest() = {}
+      override def resetBeforeTest(suite: String, flightNumber: Int) = {}
     })
   )
 }
