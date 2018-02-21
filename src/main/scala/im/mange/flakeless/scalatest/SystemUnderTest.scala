@@ -6,6 +6,6 @@ import im.mange.flakeless.reports.CurrentTestReport
 trait SystemUnderTest {
   val baseUrl: String
   val browser: Flakeless
-  def resetBeforeTest(): Unit
+  def resetBeforeTest(suite: String, flightNumber: Int): Unit
   def reportFailure(t: Throwable): Unit = { CurrentTestReport(browser) }
 }

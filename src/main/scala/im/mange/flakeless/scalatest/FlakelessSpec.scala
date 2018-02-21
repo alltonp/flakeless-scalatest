@@ -17,10 +17,11 @@ import org.scalatest.{Outcome, TestSuite}
 
 trait FlakelessSpec extends TestSuite {
 
-  //TODO: ne nice to hide this somehow, so subclasses can't see it
+  //TODO: be nice to hide this somehow, so subclasses can't see it
   protected val sutPool: SystemUnderTestPool
   protected var alwaysReport = false
 
+  //TODO: find a way to generalise this, because UnitSpec needs it too
   private val _currentTestName = new ThreadLocal[String]
   private val suite = this.suiteId.split("\\.").reverse.head
 
@@ -42,7 +43,7 @@ trait FlakelessSpec extends TestSuite {
 
     try {
       sut.browser.startFlight(suite, currentTestName)
-      sut.resetBeforeTest()
+      sut.resetBeforeTest(suite, sut.browser.getCurrentFlightNumber)
       testBody(sut)
     } catch {
       case t: Throwable =>
