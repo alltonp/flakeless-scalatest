@@ -15,10 +15,10 @@ import org.scalatest.{Outcome, TestSuite}
 //TODO: support reportAlways .. but where to put the Config .. seems odd to have one here as well as flakeless
 //... unless we extends one with the other ... flakeless.scalatest.Config
 
-trait FlakelessSpec extends TestSuite {
+trait FlakelessSpec[T <: SystemUnderTest] extends TestSuite {
 
   //TODO: be nice to hide this somehow, so subclasses can't see it
-  protected val sutPool: SystemUnderTestPool
+  protected val sutPool: SystemUnderTestPool[T]
   protected var alwaysReport = false
 
   //TODO: find a way to generalise this, because UnitSpec needs it too
@@ -39,7 +39,7 @@ trait FlakelessSpec extends TestSuite {
   }
 
   //TODO: find a way to generalise this, so we can choose what to return, e.g. a driver
-  def using(testBody: SystemUnderTest => Unit): Unit = {
+  def using(testBody: T => Unit): Unit = {
     val sut = sutPool.take().getOrElse(throw new RuntimeException("Failed to get a SystemUnderTest from pool:\n" + sutPool.status))
 
     try {

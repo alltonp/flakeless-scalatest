@@ -6,9 +6,9 @@ import collection.mutable.ListBuffer
 //import scala.concurrent.Future
 import scala.concurrent.Future
 
-case class SystemUnderTestPool(private val suts: List[SystemUnderTest])  {
-  private val all = new ListBuffer[SystemUnderTest]
-  private val available = new LinkedBlockingQueue[SystemUnderTest]
+case class SystemUnderTestPool[T](private val suts: List[T])  {
+  private val all = new ListBuffer[T]
+  private val available = new LinkedBlockingQueue[T]
 
   suts.foreach(add)
 
@@ -16,11 +16,11 @@ case class SystemUnderTestPool(private val suts: List[SystemUnderTest])  {
 //    times(instances) { add(BrowserFactory.create(browser)) }
 //  }
 
-  def write(systemUnderTest: SystemUnderTest) {
+  def write(systemUnderTest: T) {
     available.put(systemUnderTest)
   }
 
-  def take(): Option[SystemUnderTest] = {
+  def take(): Option[T] = {
     Option(available.poll(60000, TimeUnit.MILLISECONDS))
   }
 
@@ -47,7 +47,7 @@ case class SystemUnderTestPool(private val suts: List[SystemUnderTest])  {
 //    })
 //  }
 
-  private def add(sut: SystemUnderTest) {
+  private def add(sut: T) {
     all.append(sut)
     available.put(sut)
   }
