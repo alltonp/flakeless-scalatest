@@ -3,13 +3,13 @@ package im.mange.flakeless.scalatest
 import im.mange.flakeless.{Flakeless, Goto}
 import org.scalatest.refspec.RefSpec
 
-abstract class SystemUnderTestX extends SystemUnderTest {
+abstract class XSystemUnderTest extends SystemUnderTest {
   def stub(): Unit = {}
 }
 
 object WebSpecContext {
-  val sutPool = SystemUnderTestPool[SystemUnderTestX](
-    List(new SystemUnderTestX {
+  val sutPool = Pool[XSystemUnderTest](
+    List(new XSystemUnderTest {
       //launch application here ...
 //      private val application = ???
       private val port = 9000
@@ -23,8 +23,8 @@ object WebSpecContext {
   )
 }
 
-abstract class WebSpec extends RefSpec with FlakelessSpec[SystemUnderTestX] {
-  protected override val sutPool = WebSpecContext.sutPool
+abstract class WebSpec extends RefSpec with FlakelessSpec[XSystemUnderTest] {
+  protected override val sutPool: Pool[XSystemUnderTest] = WebSpecContext.sutPool
 }
 
 class ExampleSpec extends WebSpec {

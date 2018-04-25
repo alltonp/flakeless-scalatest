@@ -18,7 +18,7 @@ import org.scalatest.{Outcome, TestSuite}
 trait FlakelessSpec[T <: SystemUnderTest] extends TestSuite {
 
   //TODO: be nice to hide this somehow, so subclasses can't see it
-  protected val sutPool: SystemUnderTestPool[T]
+  protected val sutPool: Pool[T]
   protected var alwaysReport = false
 
   //TODO: find a way to generalise this, because UnitSpec needs it too

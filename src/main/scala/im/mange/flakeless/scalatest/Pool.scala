@@ -3,14 +3,14 @@ package im.mange.flakeless.scalatest
 import java.util.concurrent.{LinkedBlockingQueue, TimeUnit}
 import collection.mutable.ListBuffer
 
-case class SystemUnderTestPool[T](private val suts: List[T])  {
+case class Pool[T](private val suts: List[T])  {
   private val all = new ListBuffer[T]
   private val available = new LinkedBlockingQueue[T]
 
   suts.foreach(add)
 
-  def write(systemUnderTest: T) {
-    available.put(systemUnderTest)
+  def write(sut: T) {
+    available.put(sut)
   }
 
   def take(): Option[T] = {
