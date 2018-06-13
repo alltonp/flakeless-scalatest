@@ -17,7 +17,6 @@ resolvers ++= Seq(
 
 libraryDependencies ++= Seq(
   "im.mange"      %% "flakeless" % "[0.0.186,0.0.999]" % "provided",
-//  "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,3.99.9]" % "provided",
 
   //TODO: should be to 3.0.99, but appears they have a load of mangey snapshots
   //... would be nice to fix thought still
@@ -26,6 +25,7 @@ libraryDependencies ++= Seq(
   //TIP: only enable these for local testing ...
 //  ,
 //  "com.codeborne" % "phantomjsdriver" % "[1.3.0,1.99.9]" % "provided",
+//  "org.seleniumhq.selenium" % "selenium-java" % "[2.53.1,3.99.9]" % "provided",
 )
 
 sonatypeSettings
