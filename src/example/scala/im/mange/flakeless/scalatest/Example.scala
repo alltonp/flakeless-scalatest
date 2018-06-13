@@ -16,7 +16,7 @@ object WebSpecContext {
       private val webDriver = ??? //e.g. new org.openqa.selenium.phantomjs.PhantomJSDriver()
 
       override val baseUrl = s"http://localhost:$port"
-      override val browser = Flakeless(webDriver)
+      override val browser = ??? //Flakeless(webDriver)
 
       override def resetBeforeTest(suite: String, flightNumber: Int) = {}
     })
