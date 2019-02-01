@@ -1,5 +1,7 @@
 import scala.util.Try
 
+import xerial.sbt.Sonatype._
+
 
 name := "flakeless-scalatest"
 
