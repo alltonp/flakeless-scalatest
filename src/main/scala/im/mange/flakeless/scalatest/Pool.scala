@@ -3,7 +3,7 @@ package im.mange.flakeless.scalatest
 import java.util.concurrent.{LinkedBlockingQueue, TimeUnit}
 import collection.mutable.ListBuffer
 
-case class Pool[T](private val suts: List[T])  {
+case class Pool[T](private val suts: List[T], maxWaitMillis: Int = 60000)  {
   private val all = new ListBuffer[T]
   private val available = new LinkedBlockingQueue[T]
 
@@ -14,7 +14,7 @@ case class Pool[T](private val suts: List[T])  {
   }
 
   def take(): Option[T] = {
-    Option(available.poll(60000, TimeUnit.MILLISECONDS))
+    Option(available.poll(maxWaitMillis, TimeUnit.MILLISECONDS))
   }
 
   def status = s"all: $all\navailable: $all"

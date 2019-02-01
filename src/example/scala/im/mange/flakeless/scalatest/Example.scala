@@ -19,7 +19,7 @@ object WebSpecContext {
       override val browser = ??? //Flakeless(webDriver)
 
       override def resetBeforeTest(suite: String, flightNumber: Int) = {}
-    })
+    }), maxWaitMillis = 1000
   )
 }
 
